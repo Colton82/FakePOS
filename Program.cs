@@ -12,6 +12,10 @@ class FakeOrderGenerator
     private static readonly Uri _serverUri = new Uri("wss://localhost:7121/wss/orders");
     private static readonly Random _random = new Random();
 
+    /// <summary>
+    /// Main method to connect to WebSocket server and generate fake orders.
+    /// </summary>
+    /// <returns>Task representing the asynchronous operation.</returns>
     public static async Task Main()
     {
         try
@@ -20,7 +24,7 @@ class FakeOrderGenerator
             Console.WriteLine("Connected to WebSocket server. Generating orders...");
 
             var orderFaker = new Faker<Order>()
-            .RuleFor(o => o.Id, f => f.Random.Number(1000, 9999))
+            .RuleFor(o => o.Id, f => 3)
             .RuleFor(o => o.CustomerName, f => f.Name.FullName())
             .RuleFor(o => o.Timestamp, f => DateTime.Now)
             .RuleFor(o => o.Users_id, f => f.Random.Number(1, 10));
@@ -45,6 +49,9 @@ class FakeOrderGenerator
     }
 }
 
+/// <summary>
+/// Represents an order.
+/// </summary>
 public class Order
 {
     public int Id { get; set; }
